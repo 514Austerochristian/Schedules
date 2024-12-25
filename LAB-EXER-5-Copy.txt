@@ -1,0 +1,65 @@
+# LABORATORY EXERCISE 5 - COMPREHENSIVE OOP
+# Name: Castillo, Sebastian G.
+# Year and Section: BSCpE 2-2
+# Date: October 3, 2024
+# Problem Description: Combine encapsulation, inheritance, abstraction, and polymorphism in a cohesive program.
+
+from abc import ABC, abstractmethod
+
+# Create a base abstract class BankAccount
+class BankAccount:
+    def __init__(self, account_number: int, account_holder: str, balance: float) -> None:
+        self.__account_number: int = account_number
+        self.__account_holder: str = account_holder
+        self.__balance: float = balance
+
+    # Create GETTER methods to access the value of each attribute
+    def get_account_number(self) -> int:
+        return self.__account_number
+
+    def get_account_holder(self) -> str:
+        return self.__account_holder
+
+    def get_balance(self) -> float:
+        return self.__balance
+
+    # Create SETTER methods to modify the value of each attribute
+    def set_account_number(self, account_number: str) -> None:
+        self.__account_number = account_number
+
+    def set_account_holder(self, account_holder: str) -> None:
+        self.__account_holder = account_holder
+
+    def set_balance(self, balance: float) -> None:
+        self.__balance = balance
+
+    # Define an abstract method account_type().
+    @abstractmethod
+    def account_type(self) -> None:
+        pass
+
+# Create a derived class called SavingsAccount
+class SavingsAccount(BankAccount):
+    def __init__(self, account_number: int, account_holder: str, balance: float, interest_rate: float) -> None:
+        super().__init__(account_number, account_holder, balance)
+        # Add attribute interest_rate.
+        self.interest_rate: float = interest_rate
+
+    # Implement the account_type() method
+    def account_type(self) -> str:
+        return "Savings Account"
+
+    def calculate_interest(self) -> float:
+        return self.get_balance() * self.interest_rate
+
+
+if __name__ == "__main__":
+    # Create an instance of SavingsAccount object.
+    savings = SavingsAccount(202301985, "Sebastian Castillo", 4000, 0.03)
+    print(f"Balance: {savings.get_balance()}")
+    
+    # Display interest based off the balance of the account.
+    print(f"Interest: {savings.calculate_interest()}")
+
+    # Display account type.
+    print(f"Account Type: {savings.account_type()}")
